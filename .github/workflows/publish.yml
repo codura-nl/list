@@ -1,0 +1,38 @@
+name: Publish package to npmjs
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.GH_READ_TOKEN }}
+
+permissions: write-all
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: install
+        run: yarn install
+      - name: test
+        run: yarn test
+      - name: build
+        run: yarn build
+      - name: release
+        run: yarn release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
