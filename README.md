@@ -8,7 +8,7 @@
 - [Methods](#methods)
   - [groupBy](#groupBy)
   - [mapBy](#mapBy)
-  - [sum](#sum)
+  - [add](#add)
 
 ---
 
@@ -36,7 +36,7 @@ const users = [
   {id: 2, group: 2, name: 'Jane'},
   {id: 3, group: 1, name: 'Joe'},
 ];
-const usersByGroup = users.groupBy(user => user.group);
+const usersByGroup = List.from(users).groupBy(user => user.group);
 ```
 
 Group an array to a map using a **key function** and a **value function**
@@ -47,7 +47,7 @@ const users = [
   {id: 2, group: 2, name: 'Jane'},
   {id: 3, group: 1, name: 'Joe'},
 ];
-const userNamesById = users.groupBy(user => user.group, user => user.name);
+const userNamesById = List.from(users).groupBy(user => user.group, user => user.name);
 ```
 
 ---
@@ -62,7 +62,7 @@ const users = [
   {id: 2, name: 'Jane'},
   {id: 3, name: 'Joe'},
 ];
-const usersById = users.mapBy(user => user.id);
+const usersById = List.from(users).mapBy(user => user.id);
 ```
 
 Map an array to a map using a **key function** and a **value function**
@@ -73,17 +73,17 @@ const users = [
   {id: 2, name: 'Jane'},
   {id: 3, name: 'Joe'},
 ];
-const userNamesById = users.mapBy(user => user.id, user => user.name);
+const userNamesById = List.from(users).mapBy(user => user.id, user => user.name);
 ```
 
 ---
 
-### sum
+### add
 
-Sum addable objects in an array
+Add addable objects in an array
 
 ```ts
-class Payment {
+class Payment implements Addable<Payment> {
   constructor(readonly note: string, readonly amount: number) {
   }
 
@@ -97,5 +97,5 @@ const payments = [
   new Payment('second', 200),
   new Payment('third', 300),
 ];
-const sum = payments.sum(new Payment('sum', 0));
+const sum = List.from(payments).add(new Payment('sum', 0));
 ```

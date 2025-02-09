@@ -1,8 +1,15 @@
 {
   "branches": [
-    "main"
+    "main",
+    {
+      "name": "next",
+      "channel": "next"
+    },
+    {
+      "name": "beta",
+      "prerelease": true
+    }
   ],
-  "pkgRoot": "dist",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/npm",

@@ -5,8 +5,12 @@
   "author": "Jan Willem Harmelink",
   "license": "GPL-3.0-only",
   "type": "module",
-  "types": "./src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codura-nl/list.git"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -16,10 +20,6 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codura-nl/list.git"
-  },
   "scripts": {
     "build": "vite build",
     "build:watch": "tsc && vite build --watch",
