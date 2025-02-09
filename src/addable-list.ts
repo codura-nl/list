@@ -11,11 +11,11 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     super(items);
   }
 
-  static from<T extends Addable<T>>(iterable: Iterable<T>): AddableList<T> {
+  static from<T extends Addable<T>>(iterable: Iterable<T> | ArrayLike<T>): AddableList<T> {
     return new AddableList(Array.from(iterable));
   }
 
-  static of<T extends Addable<T>>(...items: T[]): AddableList<T> {
+  static of<T extends Addable<T>>(items: T[] = []): AddableList<T> {
     return new AddableList(items);
   }
 

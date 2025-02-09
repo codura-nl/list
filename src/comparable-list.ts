@@ -11,11 +11,11 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     super(items);
   }
 
-  static from<T extends Comparable<T>>(iterable: Iterable<T>): ComparableList<T> {
+  static from<T extends Comparable<T>>(iterable: Iterable<T> | ArrayLike<T>): ComparableList<T> {
     return new ComparableList(Array.from(iterable));
   }
 
-  static of<T extends Comparable<T>>(...items: T[]): ComparableList<T> {
+  static of<T extends Comparable<T>>(items: T[] = []): ComparableList<T> {
     return new ComparableList(items);
   }
 

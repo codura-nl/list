@@ -11,11 +11,11 @@ export class StringList extends AbstractList<string> {
     super(items);
   }
 
-  static from(iterable: Iterable<string>): StringList {
+  static from(iterable: Iterable<string> | ArrayLike<string>): StringList {
     return new StringList(Array.from(iterable));
   }
 
-  static of(...items: string[]): StringList {
+  static of(items: string[] = []): StringList {
     return new StringList(items);
   }
 

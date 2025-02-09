@@ -11,11 +11,11 @@ export class NumberList extends AbstractList<number> {
     super(items);
   }
 
-  static from(iterable: Iterable<number>): NumberList {
+  static from(iterable: Iterable<number> | ArrayLike<number>): NumberList {
     return new NumberList(Array.from(iterable));
   }
 
-  static of(...items: number[]): NumberList {
+  static of(items: number[] = []): NumberList {
     return new NumberList(items);
   }
 

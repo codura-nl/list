@@ -12,12 +12,12 @@ export class List<T> extends AbstractList<T> {
     super(items);
   }
 
-  static of<T>(...items: T[]): List<T> {
-    return new List(items);
+  static from<T>(iterable: Iterable<T> | ArrayLike<T>): List<T> {
+    return new List(Array.from(iterable));
   }
 
-  static from<T>(iterable: Iterable<T>): List<T> {
-    return new List(Array.from(iterable));
+  static of<T>(items: T[] = []): List<T> {
+    return new List(items);
   }
 
   filter(predicate: (item: T, index?: number, array?: T[]) => boolean): List<T> {
