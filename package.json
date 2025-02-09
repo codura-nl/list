@@ -1,7 +1,7 @@
 {
   "name": "@codura/list",
   "description": "An array wrapper with useful functions for JavaScript",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Jan Willem Harmelink",
   "license": "GPL-3.0-only",
   "type": "module",
