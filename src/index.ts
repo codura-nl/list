@@ -1,3 +1,4 @@
+export * from './abstract-list';
 export * from './addable-list';
 export * from './comparable-list';
 export * from './flattenable-list';
