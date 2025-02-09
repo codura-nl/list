@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { Comparable, ComparableList } from '../src';
 
-class MockComparable implements Comparable {
+class MockComparable implements Comparable<MockComparable> {
   constructor(private readonly value: number) {
   }
 
   equals(other: MockComparable): boolean {
     return this.value === other.value;
-  }
-
-  getValue(): number {
-    return this.value;
   }
 }
 

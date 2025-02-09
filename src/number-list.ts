@@ -55,19 +55,19 @@ export class NumberList extends AbstractList<number> {
     return this.items.reduce((acc: number, cur: number): number => acc + cur, initialValue);
   }
 
-  toAddableList<K extends Addable>(mapper: (item: number) => K): AddableList<K> {
+  toAddableList<K extends Addable<K>>(mapper: (item: number) => K): AddableList<K> {
     return new AddableList(this.items.map(item => mapper(item)));
   }
 
-  toComparableList<K extends Comparable>(mapper: (item: number) => K): ComparableList<K> {
+  toComparableList<K extends Comparable<K>>(mapper: (item: number) => K): ComparableList<K> {
     return new ComparableList(this.items.map(item => mapper(item)));
   }
 
-  toFlattenableList<K extends Flattenable>(mapper: (item: number) => K): FlattenableList<K> {
+  toFlattenableList<K extends Flattenable<K>>(mapper: (item: number) => K): FlattenableList<K> {
     return new FlattenableList(this.items.map(item => mapper(item)));
   }
 
-  toMergeableList<K extends Mergeable>(mapper: (item: number) => K): MergeableList<K> {
+  toMergeableList<K extends Mergeable<K>>(mapper: (item: number) => K): MergeableList<K> {
     return new MergeableList(this.items.map(item => mapper(item)));
   }
 

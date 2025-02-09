@@ -27,19 +27,19 @@ export class StringList extends AbstractList<string> {
     return new StringList(this.items.map(mapper));
   }
 
-  toAddableList<K extends Addable>(mapper: (item: string) => K): AddableList<K> {
+  toAddableList<K extends Addable<K>>(mapper: (item: string) => K): AddableList<K> {
     return new AddableList(this.items.map(item => mapper(item)));
   }
 
-  toComparableList<K extends Comparable>(mapper: (item: string) => K): ComparableList<K> {
+  toComparableList<K extends Comparable<K>>(mapper: (item: string) => K): ComparableList<K> {
     return new ComparableList(this.items.map(item => mapper(item)));
   }
 
-  toFlattenableList<K extends Flattenable>(mapper: (item: string) => K): FlattenableList<K> {
+  toFlattenableList<K extends Flattenable<K>>(mapper: (item: string) => K): FlattenableList<K> {
     return new FlattenableList(this.items.map(item => mapper(item)));
   }
 
-  toMergeableList<K extends Mergeable>(mapper: (item: string) => K): MergeableList<K> {
+  toMergeableList<K extends Mergeable<K>>(mapper: (item: string) => K): MergeableList<K> {
     return new MergeableList(this.items.map(item => mapper(item)));
   }
 

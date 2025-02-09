@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { Flattenable, FlattenableList } from '../src';
 
-class MockFlattenable implements Flattenable {
+class MockFlattenable implements Flattenable<MockFlattenable> {
   constructor(private readonly value: string) {
   }
 
-  flatten(value: string): string {
-    return [this.value, value].join('');
+  flatten(other: MockFlattenable): MockFlattenable {
+    return new MockFlattenable([this.value, other.value].join(''));
   }
 }
 

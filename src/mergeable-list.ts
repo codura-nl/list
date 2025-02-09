@@ -6,12 +6,12 @@ import { Addable, Comparable, Flattenable, Mergeable } from '~/interface';
 import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
-export class MergeableList<T extends Mergeable> extends AbstractList<T> {
+export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
     super(items);
   }
 
-  static of<T extends Mergeable>(...items: T[]): MergeableList<T> {
+  static of<T extends Mergeable<T>>(...items: T[]): MergeableList<T> {
     return new MergeableList(items);
   }
 
@@ -43,15 +43,15 @@ export class MergeableList<T extends Mergeable> extends AbstractList<T> {
     return new MergeableList(items);
   }
 
-  toAddableList<K extends Addable>(mapper: (item: T) => K): AddableList<K> {
+  toAddableList<K extends Addable<K>>(mapper: (item: T) => K): AddableList<K> {
     return new AddableList(this.items.map(item => mapper(item)));
   }
 
-  toComparableList<K extends Comparable>(mapper: (item: T) => K): ComparableList<K> {
+  toComparableList<K extends Comparable<K>>(mapper: (item: T) => K): ComparableList<K> {
     return new ComparableList(this.items.map(item => mapper(item)));
   }
 
-  toFlattenableList<K extends Flattenable>(mapper: (item: T) => K): FlattenableList<K> {
+  toFlattenableList<K extends Flattenable<K>>(mapper: (item: T) => K): FlattenableList<K> {
     return new FlattenableList(this.items.map(item => mapper(item)));
   }
 
@@ -63,7 +63,7 @@ export class MergeableList<T extends Mergeable> extends AbstractList<T> {
     return new StringList(this.items.map(item => mapper(item)));
   }
 
-  private isMergeable(object: any): object is Mergeable {
+  private isMergeable(object: any): object is Mergeable<T> {
     return 'merge' in object;
   }
 }

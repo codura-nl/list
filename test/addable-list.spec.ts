@@ -1,16 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { Addable, AddableList } from '../src';
 
-class MockAddable implements Addable {
+class MockAddable implements Addable<MockAddable> {
   constructor(private readonly value: number) {
   }
 
   add(other: MockAddable): MockAddable {
     return new MockAddable(this.value + other.value);
-  }
-
-  getValue(): number {
-    return this.value;
   }
 }
 

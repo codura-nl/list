@@ -1,3 +1,3 @@
-export interface Mergeable {
-  merge: <T extends Mergeable>(item: T) => T;
+export interface Mergeable<T extends Mergeable<T>> {
+  merge: (item: T) => T;
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Mergeable, MergeableList } from '../src';
 
-class TestMergeable implements Mergeable {
+class TestMergeable implements Mergeable<TestMergeable> {
   constructor(public id: number, public value: number) {
   }
 

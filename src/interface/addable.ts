@@ -1,3 +1,3 @@
-export interface Addable {
-  add: <T extends Addable>(item: T) => T;
+export interface Addable<T extends Addable<T>> {
+  add: (item: T) => T;
 }
