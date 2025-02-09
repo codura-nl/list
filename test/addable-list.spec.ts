@@ -8,6 +8,10 @@ class MockAddable implements Addable<MockAddable> {
   add(other: MockAddable): MockAddable {
     return new MockAddable(this.value + other.value);
   }
+
+  getValue(): number {
+    return this.value;
+  }
 }
 
 describe('AddableList', () => {

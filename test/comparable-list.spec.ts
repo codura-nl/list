@@ -8,6 +8,10 @@ class MockComparable implements Comparable<MockComparable> {
   equals(other: MockComparable): boolean {
     return this.value === other.value;
   }
+
+  getValue(): number {
+    return this.value;
+  }
 }
 
 describe('ComparableList', () => {
