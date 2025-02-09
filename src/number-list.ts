@@ -15,7 +15,11 @@ export class NumberList extends AbstractList<number> {
     return new NumberList(items);
   }
 
-  map(mapper: (item: number) => number): NumberList {
+  filter(predicate: (value: number, index?: number, array?: number[]) => boolean): NumberList {
+    return new NumberList(this.items.filter(predicate));
+  }
+
+  map(mapper: (value: number, index?: number, array?: number[]) => number): NumberList {
     return new NumberList(this.items.map(mapper));
   }
 

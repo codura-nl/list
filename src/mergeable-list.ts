@@ -15,7 +15,11 @@ export class MergeableList<T extends Mergeable> extends AbstractList<T> {
     return new MergeableList(items);
   }
 
-  map(mapper: (item: T) => T): MergeableList<T> {
+  filter(predicate: (value: T, index?: number, array?: T[]) => boolean): MergeableList<T> {
+    return new MergeableList(this.items.filter(predicate));
+  }
+
+  map(mapper: (value: T, index?: number, array?: T[]) => T): MergeableList<T> {
     return new MergeableList(this.items.map(mapper));
   }
 

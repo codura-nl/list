@@ -2,13 +2,9 @@ export abstract class AbstractList<T> {
   protected constructor(protected readonly items: T[] = []) {
   }
 
-  get value(): T[] {
-    return this.items;
-  }
-
   groupBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
-      return this.items.reduce((acc: Map<K, T[]>, cur: T) => {
+      return this.reduce((acc: Map<K, T[]>, cur: T) => {
         const key = identifier(cur);
 
         if (!acc.has(key)) {
@@ -21,7 +17,7 @@ export abstract class AbstractList<T> {
       }, new Map<K, T[]>());
     }
 
-    return this.items.reduce((acc: Map<K, L[]>, cur: T) => {
+    return this.reduce((acc: Map<K, L[]>, cur: T) => {
       const key = identifier(cur);
 
       if (!acc.has(key)) {
@@ -36,22 +32,26 @@ export abstract class AbstractList<T> {
 
   mapBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T | L> {
     if (!mapper) {
-      return this.items.reduce((store: Map<K, T>, item: T) => {
-        const key = identifier(item);
+      return this.reduce((acc: Map<K, T>, cur: T) => {
+        const key = identifier(cur);
 
-        store.set(key, item);
+        acc.set(key, cur);
 
-        return store;
+        return acc;
       }, new Map<K, T>());
     }
 
-    return this.items.reduce((store: Map<K, L>, item: T) => {
-      const key = identifier(item);
+    return this.reduce((acc: Map<K, L>, cur: T) => {
+      const key = identifier(cur);
 
-      store.set(key, mapper(item));
+      acc.set(key, mapper(cur));
 
-      return store;
+      return acc;
     }, new Map<K, L>());
+  }
+
+  reduce<K>(reducer: (acc: K, cur: T, index?: number, array?: T[]) => K, initialValue: K): K {
+    return this.items.reduce(reducer, initialValue);
   }
 
   toArray(): T[] {

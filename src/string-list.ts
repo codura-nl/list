@@ -15,11 +15,15 @@ export class StringList extends AbstractList<string> {
     return new StringList(items);
   }
 
+  filter(predicate: (value: string, index?: number, array?: string[]) => boolean): StringList {
+    return new StringList(this.items.filter(predicate));
+  }
+
   join(seperator?: string): string {
     return this.items.join(seperator);
   }
 
-  map(mapper: (item: string) => string): StringList {
+  map(mapper: (value: string, index?: number, array?: string[]) => string): StringList {
     return new StringList(this.items.map(mapper));
   }
 

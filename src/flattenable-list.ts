@@ -15,8 +15,12 @@ export class FlattenableList<T extends Flattenable> extends AbstractList<T> {
     return new FlattenableList(items);
   }
 
+  filter(predicate: (value: T, index?: number, array?: T[]) => boolean): FlattenableList<T> {
+    return new FlattenableList(this.items.filter(predicate));
+  }
+
   flattenBy<K>(identifier: (item: T) => K): FlattenableList<T> {
-    const items = this.items.reduce((acc: T[], cur: T) => {
+    const items = this.reduce((acc: T[], cur: T) => {
       if (!this.isFlattenable(cur)) {
         throw new Error(`Cannot flatten non-flattenable item: ${JSON.stringify(cur)}`);
       }
@@ -35,7 +39,7 @@ export class FlattenableList<T extends Flattenable> extends AbstractList<T> {
     return new FlattenableList(items);
   }
 
-  map(mapper: (item: T) => T): FlattenableList<T> {
+  map(mapper: (value: T, index?: number, array?: T[]) => T): FlattenableList<T> {
     return new FlattenableList(this.items.map(mapper));
   }
 

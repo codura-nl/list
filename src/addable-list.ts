@@ -27,7 +27,11 @@ export class AddableList<T extends Addable> extends AbstractList<T> {
     }, initialValue);
   }
 
-  map(mapper: (item: T) => T): AddableList<T> {
+  filter(predicate: (value: T, index?: number, array?: T[]) => boolean): AddableList<T> {
+    return new AddableList(this.items.filter(predicate));
+  }
+
+  map<K extends Addable>(mapper: (value: T, index?: number, array?: T[]) => K): AddableList<K> {
     return new AddableList(this.items.map(mapper));
   }
 
