@@ -30,7 +30,7 @@ export abstract class AbstractList<T> {
     return Array.from(map.values());
   }
 
-  groupBy<K, L = T>(identifier: (item: T) => K, mapper: (item?: T) => L): Map<K, T[] | L[]> {
+  groupBy<K, L = T>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T[]>, cur: T) => {
         const key = identifier(cur);
