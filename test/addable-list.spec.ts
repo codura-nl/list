@@ -16,7 +16,7 @@ class MockAddable implements Addable<MockAddable> {
 
 describe('AddableList', () => {
   it('should create an AddableList with the static of method', () => {
-    const list = AddableList.of(new MockAddable(1), new MockAddable(2));
+    const list = AddableList.from([new MockAddable(1), new MockAddable(2)]);
     expect(list.toArray().length).toBe(2);
   });
 

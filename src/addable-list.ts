@@ -15,7 +15,7 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     return new AddableList(Array.from(iterable));
   }
 
-  static of<T extends Addable<T>>(items: T[] = []): AddableList<T> {
+  static of<T extends Addable<T>>(...items: T[]): AddableList<T> {
     return new AddableList(items);
   }
 

@@ -16,7 +16,7 @@ export class List<T> extends AbstractList<T> {
     return new List(Array.from(iterable));
   }
 
-  static of<T>(items: T[] = []): List<T> {
+  static of<T>(...items: T[]): List<T> {
     return new List(items);
   }
 

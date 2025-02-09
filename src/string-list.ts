@@ -15,7 +15,7 @@ export class StringList extends AbstractList<string> {
     return new StringList(Array.from(iterable));
   }
 
-  static of(items: string[] = []): StringList {
+  static of(...items: string[]): StringList {
     return new StringList(items);
   }
 

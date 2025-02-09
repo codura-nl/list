@@ -15,7 +15,7 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return new MergeableList(Array.from(iterable));
   }
 
-  static of<T extends Mergeable<T>>(items: T[] = []): MergeableList<T> {
+  static of<T extends Mergeable<T>>(...items: T[]): MergeableList<T> {
     return new MergeableList(items);
   }
 

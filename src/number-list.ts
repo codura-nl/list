@@ -15,7 +15,7 @@ export class NumberList extends AbstractList<number> {
     return new NumberList(Array.from(iterable));
   }
 
-  static of(items: number[] = []): NumberList {
+  static of(...items: number[]): NumberList {
     return new NumberList(items);
   }
 

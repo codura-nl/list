@@ -7,7 +7,7 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
 export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
-  constructor(items?: T[]) {
+  constructor(items: T[] = []) {
     super(items);
   }
 
@@ -15,7 +15,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(Array.from(iterable));
   }
 
-  static of<T extends Comparable<T>>(items: T[] = []): ComparableList<T> {
+  static of<T extends Comparable<T>>(...items: T[]): ComparableList<T> {
     return new ComparableList(items);
   }
 
