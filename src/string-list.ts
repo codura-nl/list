@@ -23,6 +23,10 @@ export class StringList extends AbstractList<string> {
     return new StringList(this.items.filter(predicate));
   }
 
+  flatMap(mapper: (item: string, index?: number, array?: string[]) => string[]): StringList {
+    return new StringList(this.items.flatMap(mapper));
+  }
+
   join(seperator?: string): string {
     return this.items.join(seperator);
   }

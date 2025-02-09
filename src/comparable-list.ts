@@ -41,7 +41,11 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(this.items.filter(predicate));
   }
 
-  map(mapper: (value: T, index?: number, array?: T[]) => T): ComparableList<T> {
+  flatMap<K extends Comparable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): ComparableList<K> {
+    return new ComparableList(this.items.flatMap(mapper));
+  }
+
+  map<K extends Comparable<K>>(mapper: (value: T, index?: number, array?: T[]) => K): ComparableList<K> {
     return new ComparableList(this.items.map(mapper));
   }
 
