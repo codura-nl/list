@@ -1,6 +1,10 @@
 import { AbstractList } from '~/abstract-list';
 
 export class List<T> extends AbstractList<T> {
+  constructor(items?: T[]) {
+    super(items);
+  }
+
   static of<T>(...items: T[]): List<T> {
     return new List(items);
   }

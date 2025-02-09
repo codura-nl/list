@@ -2,6 +2,34 @@ export abstract class AbstractList<T> {
   protected constructor(protected readonly items: T[] = []) {
   }
 
+  distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Array<T | L> {
+    if (!mapper) {
+      const map = this.reduce((store: Map<K, T>, item: T) => {
+        const key = identifier(item);
+
+        if (!store.has(key)) {
+          store.set(key, item);
+        }
+
+        return store;
+      }, new Map<K, T>());
+
+      return Array.from(map.values());
+    }
+
+    const map = this.reduce((store: Map<K, L>, item: T) => {
+      const key = identifier(item);
+
+      if (!store.has(key)) {
+        store.set(key, mapper(item));
+      }
+
+      return store;
+    }, new Map<K, L>());
+
+    return Array.from(map.values());
+  }
+
   groupBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T[]>, cur: T) => {
