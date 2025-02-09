@@ -11,7 +11,7 @@ export class NumberList extends AbstractList<number> {
     super(items);
   }
 
-  static from(iterable: Iterable<number> | ArrayLike<number>): NumberList {
+  static from(iterable: Iterable<number> | ArrayLike<number> = []): NumberList {
     return new NumberList(Array.from(iterable));
   }
 

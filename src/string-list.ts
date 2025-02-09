@@ -11,7 +11,7 @@ export class StringList extends AbstractList<string> {
     super(items);
   }
 
-  static from(iterable: Iterable<string> | ArrayLike<string>): StringList {
+  static from(iterable: Iterable<string> | ArrayLike<string> = []): StringList {
     return new StringList(Array.from(iterable));
   }
 

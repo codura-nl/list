@@ -11,7 +11,7 @@ export class FlattenableList<T extends Flattenable<T>> extends AbstractList<T> {
     super(items);
   }
 
-  static from<T extends Flattenable<T>>(iterable: Iterable<T> | ArrayLike<T>): FlattenableList<T> {
+  static from<T extends Flattenable<T>>(iterable: Iterable<T> | ArrayLike<T> = []): FlattenableList<T> {
     return new FlattenableList(Array.from(iterable));
   }
 

@@ -12,7 +12,7 @@ export class List<T> extends AbstractList<T> {
     super(items);
   }
 
-  static from<T>(iterable: Iterable<T> | ArrayLike<T>): List<T> {
+  static from<T>(iterable: Iterable<T> | ArrayLike<T> = []): List<T> {
     return new List(Array.from(iterable));
   }
 
