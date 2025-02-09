@@ -7,8 +7,12 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
 export class AddableList<T extends Addable<T>> extends AbstractList<T> {
-  constructor(items?: T[]) {
+  constructor(items: T[] = []) {
     super(items);
+  }
+
+  static from<T extends Addable<T>>(iterable: Iterable<T>): AddableList<T> {
+    return new AddableList(Array.from(iterable));
   }
 
   static of<T extends Addable<T>>(...items: T[]): AddableList<T> {

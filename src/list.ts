@@ -1,12 +1,16 @@
 import { AbstractList } from '~/abstract-list';
 
 export class List<T> extends AbstractList<T> {
-  constructor(items?: T[]) {
+  constructor(items: T[] = []) {
     super(items);
   }
 
-  static of<T>(...items: T[]): List<T> {
+  static of<T>(items: T[] = []): List<T> {
     return new List(items);
+  }
+
+  static from<T>(iterable: Iterable<T>): List<T> {
+    return new List(Array.from(iterable));
   }
 
   filter(predicate: (item: T) => boolean): List<T> {

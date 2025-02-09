@@ -7,8 +7,12 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
 export class FlattenableList<T extends Flattenable<T>> extends AbstractList<T> {
-  constructor(items?: T[]) {
+  constructor(items: T[] = []) {
     super(items);
+  }
+
+  static from<T extends Flattenable<T>>(iterable: Iterable<T>): FlattenableList<T> {
+    return new FlattenableList(Array.from(iterable));
   }
 
   static of<T extends Flattenable<T>>(...items: T[]): FlattenableList<T> {

@@ -7,8 +7,12 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
 export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
-  constructor(items?: T[]) {
+  constructor(items: T[] = []) {
     super(items);
+  }
+
+  static from<T extends Mergeable<T>>(iterable: Iterable<T>): MergeableList<T> {
+    return new MergeableList(Array.from(iterable));
   }
 
   static of<T extends Mergeable<T>>(...items: T[]): MergeableList<T> {
