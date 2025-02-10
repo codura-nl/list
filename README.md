@@ -17,6 +17,13 @@
         - [mapBy](#mapBy)
     - [MergeableList](#mergeableList)
         - [mergeBy](#mergeBy)
+    - [NumberList](#numberList)
+        - [max](#max)
+        - [min](#min)
+        - [subtract](#sub)
+        - [sum](#sum)
+    - [StringList](#stringList)
+        - [join](#join)
 
 ## Installation
 
@@ -340,7 +347,7 @@ import { NumberList, List } from '@codura/list';
 const numberList = List.of({ n: 1 }, { n: 2 }, { n: 3 }).toNumberList(item => item.n); // NumberList([1, 2, 3])
 ```
 
-#### sum
+#### max
 
 Max number in a `NumberList`
 
@@ -350,6 +357,8 @@ import { NumberList } from '@codura/list';
 const numbers = NumberList.of(1, 2, 3).max(); // 3
 ```
 
+#### min
+
 Min number in a `NumberList`
 
 ```ts
@@ -358,6 +367,8 @@ import { NumberList } from '@codura/list';
 const numbers = NumberList.of(1, 2, 3).min(); // 1
 ```
 
+#### sub
+
 Subtract all numbers in a `NumberList`
 
 ```ts
@@ -365,6 +376,8 @@ import { NumberList } from '@codura/list';
 
 const numbers = NumberList.of(1, 2, 3).subtract(6); // 0
 ```
+
+#### sum
 
 Sum all numbers in a `NumberList`
 
