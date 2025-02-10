@@ -2,6 +2,8 @@ export abstract class AbstractList<T> {
   protected constructor(protected readonly items: T[] = []) {
   }
 
+  distinctBy<K>(identifier: (item: T) => K): Array<T>;
+  distinctBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Array<L>;
   distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Array<T | L> {
     if (!mapper) {
       const map = this.reduce((store: Map<K, T>, item: T) => {
@@ -30,6 +32,12 @@ export abstract class AbstractList<T> {
     return Array.from(map.values());
   }
 
+  every(predicate: (item: T, index?: number, array?: T[]) => boolean): boolean {
+    return this.items.every(predicate);
+  }
+
+  groupBy<K>(identifier: (item: T) => K): Map<K, T[]>;
+  groupBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Map<K, L[]>;
   groupBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T[]>, cur: T) => {
@@ -58,6 +66,8 @@ export abstract class AbstractList<T> {
     }, new Map<K, L[]>());
   }
 
+  mapBy<K>(identifier: (item: T) => K): Map<K, T>;
+  mapBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Map<K, L>;
   mapBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T | L> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T>, cur: T) => {
@@ -80,6 +90,10 @@ export abstract class AbstractList<T> {
 
   reduce<K>(reducer: (acc: K, cur: T, index?: number, array?: T[]) => K, initialValue: K): K {
     return this.items.reduce(reducer, initialValue);
+  }
+
+  some(predicate: (item: T, index?: number, array?: T[]) => boolean): boolean {
+    return this.items.some(predicate);
   }
 
   toArray(): T[] {
