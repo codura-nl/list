@@ -19,6 +19,10 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return new MergeableList(items);
   }
 
+  distinctBy<K>(identifier: (item: T) => K): MergeableList<T> {
+    return MergeableList.from(super.doDistinctBy(identifier));
+  }
+
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): MergeableList<T> {
     return new MergeableList(this.items.filter(predicate));
   }

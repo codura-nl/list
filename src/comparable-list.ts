@@ -19,6 +19,10 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(items);
   }
 
+  distinctBy<K>(identifier: (item: T) => K): ComparableList<T> {
+    return ComparableList.from(super.doDistinctBy(identifier));
+  }
+
   equals(items: T[] = []): boolean {
     if (!items.length) {
       return !this.items.length; // If both empty, they are equal

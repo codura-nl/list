@@ -205,7 +205,7 @@ const usersWithDuplicates = List.of(
   { id: '2', gender: 'female', name: 'Jane' },
   { id: '1', gender: 'male', name: 'John' },
 );
-const usersWithoutDuplicates = usersWithDuplicates.distinctBy(user => user.id); // [{ id: '1', gender: 'male', name: 'John' }, { id: '2', gender: 'female', name: 'Jane' }]
+const usersWithoutDuplicates = usersWithDuplicates.distinctBy(user => user.id); // List([{ id: '1', gender: 'male', name: 'John' }, { id: '2', gender: 'female', name: 'Jane' }])
 ```
 
 Remove duplicates from a `List` using a **key function** and a **value function**
@@ -218,7 +218,7 @@ const usersWithDuplicates = List.of(
   { id: '2', gender: 'female', name: 'Jane' },
   { id: '1', gender: 'male', name: 'John' },
 );
-const namesWithoutDuplicates = usersWithDuplicates.distinctBy(user => user.id, user => user.name); // ['John', 'Jane']
+const namesWithoutDuplicates = usersWithDuplicates.distinctBy(user => user.id, user => user.name); // List(['John', 'Jane'])
 ```
 
 ### groupBy

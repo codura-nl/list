@@ -20,6 +20,12 @@ export class List<T> extends AbstractList<T> {
     return new List(items);
   }
 
+  distinctBy<K>(identifier: (item: T) => K): List<T>;
+  distinctBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): List<L>;
+  distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): List<T | L> {
+    return List.from(super.doDistinctBy(identifier, mapper));
+  }
+
   filter(predicate: (item: T, index?: number, array?: T[]) => boolean): List<T> {
     return new List(this.items.filter(predicate));
   }

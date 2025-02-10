@@ -19,6 +19,10 @@ export class StringList extends AbstractList<string> {
     return new StringList(items);
   }
 
+  distinct(): StringList {
+    return StringList.from(super.doDistinct());
+  }
+
   filter(predicate: (value: string, index?: number, array?: string[]) => boolean): StringList {
     return new StringList(this.items.filter(predicate));
   }

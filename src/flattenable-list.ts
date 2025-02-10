@@ -19,6 +19,10 @@ export class FlattenableList<T extends Flattenable<T>> extends AbstractList<T> {
     return new FlattenableList(items);
   }
 
+  distinctBy<K>(identifier: (item: T) => K): FlattenableList<T> {
+    return FlattenableList.from(super.doDistinctBy(identifier));
+  }
+
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): FlattenableList<T> {
     return new FlattenableList(this.items.filter(predicate));
   }
