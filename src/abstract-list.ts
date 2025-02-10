@@ -2,7 +2,7 @@ export abstract class AbstractList<T> {
   protected constructor(protected readonly items: T[] = []) {
   }
 
-  distinctBy<K, L = T>(identifier: (item: T) => K, mapper?: (item: T) => L): Array<T | L> {
+  distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Array<T | L> {
     if (!mapper) {
       const map = this.reduce((store: Map<K, T>, item: T) => {
         const key = identifier(item);
@@ -30,7 +30,7 @@ export abstract class AbstractList<T> {
     return Array.from(map.values());
   }
 
-  groupBy<K, L = T>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
+  groupBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T[]>, cur: T) => {
         const key = identifier(cur);
@@ -58,7 +58,7 @@ export abstract class AbstractList<T> {
     }, new Map<K, L[]>());
   }
 
-  mapBy<K, L = T>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T | L> {
+  mapBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T | L> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T>, cur: T) => {
         const key = identifier(cur);
