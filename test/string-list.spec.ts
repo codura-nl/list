@@ -1,5 +1,5 @@
+import { StringList } from '@codura/list';
 import { describe, expect, it } from 'vitest';
-import { StringList } from '../src';
 
 describe('StringList', () => {
   it('should join items with a separator', () => {

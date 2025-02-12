@@ -1,5 +1,5 @@
+import { Addable, AddableList } from '@codura/list';
 import { describe, expect, it } from 'vitest';
-import { Addable, AddableList } from '../src';
 
 class MockAddable implements Addable<MockAddable> {
   constructor(private readonly value: number) {
@@ -27,7 +27,7 @@ describe('AddableList', () => {
   });
 
   it('should throw an error when adding a non-addable item', () => {
-    const list = new AddableList([new MockAddable(1), {} as Addable]);
+    const list = new AddableList([new MockAddable(1), {} as any]);
     expect(() => list.add(new MockAddable(0))).toThrow('Cannot add non-addable item');
   });
 });

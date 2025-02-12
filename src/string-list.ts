@@ -1,8 +1,7 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
 import { ComparableList } from '~/comparable-list';
-import { FlattenableList } from '~/flattenable-list';
-import { Addable, Comparable, Flattenable, Mergeable } from '~/interface';
+import { Addable, Comparable, Mergeable } from '~/interface';
 import { MergeableList } from '~/mergeable-list';
 import { NumberList } from '~/number-list';
 
@@ -45,10 +44,6 @@ export class StringList extends AbstractList<string> {
 
   toComparableList<K extends Comparable<K>>(mapper: (item: string) => K): ComparableList<K> {
     return new ComparableList(this.items.map(item => mapper(item)));
-  }
-
-  toFlattenableList<K extends Flattenable<K>>(mapper: (item: string) => K): FlattenableList<K> {
-    return new FlattenableList(this.items.map(item => mapper(item)));
   }
 
   toMergeableList<K extends Mergeable<K>>(mapper: (item: string) => K): MergeableList<K> {

@@ -1,5 +1,5 @@
+import { Mergeable, MergeableList } from '@codura/list';
 import { describe, expect, it } from 'vitest';
-import { Mergeable, MergeableList } from '../src';
 
 class TestMergeable implements Mergeable<TestMergeable> {
   constructor(public id: number, public value: number) {

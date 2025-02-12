@@ -20,7 +20,7 @@
     - [NumberList](#numberList)
         - [max](#max)
         - [min](#min)
-        - [subtract](#sub)
+        - [sub](#sub)
         - [sum](#sum)
     - [StringList](#stringList)
         - [join](#join)

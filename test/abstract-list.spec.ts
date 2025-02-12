@@ -1,5 +1,5 @@
+import { List } from '@codura/list';
 import { describe, expect, it } from 'vitest';
-import { List } from '../src';
 
 class Mock {
   constructor(readonly value: number, readonly name: string) {
@@ -22,6 +22,6 @@ describe('AbstractList', () => {
     const group = list.groupBy(item => item.name);
 
     expect(group.size).toBe(2);
-    expect(group.get('a').length).toBe(2);
+    expect(group.get('a')?.length).toBe(2);
   });
 });

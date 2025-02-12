@@ -1,5 +1,5 @@
+import { NumberList } from '@codura/list';
 import { describe, expect, it } from 'vitest';
-import { NumberList } from '../src';
 
 describe('NumberList', () => {
   it('should sum all numbers in the list', () => {
