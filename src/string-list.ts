@@ -30,19 +30,19 @@ export class StringList extends AbstractList<string> {
     return new StringList(this.items.flatMap(mapper));
   }
 
-  flattenToAddableList<K extends Addable<K>>(mapper: (item: string) => K): AddableList<K> {
+  flattenToAddableList<K extends Addable<K>>(mapper: (item: string) => K[]): AddableList<K> {
     return new AddableList(this.items.flatMap(item => mapper(item)));
   }
 
-  flattenToComparableList<K extends Comparable<K>>(mapper: (item: string) => K): ComparableList<K> {
+  flattenToComparableList<K extends Comparable<K>>(mapper: (item: string) => K[]): ComparableList<K> {
     return new ComparableList(this.items.flatMap(item => mapper(item)));
   }
 
-  flattenToMergeableList<K extends Mergeable<K>>(mapper: (item: string) => K): MergeableList<K> {
+  flattenToMergeableList<K extends Mergeable<K>>(mapper: (item: string) => K[]): MergeableList<K> {
     return new MergeableList(this.items.flatMap(item => mapper(item)));
   }
 
-  flattenToNumberList(mapper: (item: string) => number): NumberList {
+  flattenToNumberList(mapper: (item: string) => number[]): NumberList {
     return new NumberList(this.items.flatMap(item => mapper(item)));
   }
 
