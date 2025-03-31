@@ -7,7 +7,9 @@ export abstract class AbstractList<T> {
   }
 
   groupBy<K>(identifier: (item: T) => K): Map<K, T[]>;
+
   groupBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Map<K, L[]>;
+
   groupBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T[] | L[]> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T[]>, cur: T) => {
@@ -37,7 +39,9 @@ export abstract class AbstractList<T> {
   }
 
   mapBy<K>(identifier: (item: T) => K): Map<K, T>;
+
   mapBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Map<K, L>;
+
   mapBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Map<K, T | L> {
     if (!mapper) {
       return this.reduce((acc: Map<K, T>, cur: T) => {
@@ -56,6 +60,10 @@ export abstract class AbstractList<T> {
 
       return acc;
     }, new Map<K, L>());
+  }
+
+  nonNullable<T>(value: T): value is NonNullable<T> {
+    return value !== null && value !== undefined;
   }
 
   reduce<K>(reducer: (acc: K, cur: T, index?: number, array?: T[]) => K, initialValue: K): K {

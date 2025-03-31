@@ -26,6 +26,10 @@ export class NumberList extends AbstractList<number> {
     return new NumberList(this.items.filter(predicate));
   }
 
+  filterEmpty(): NumberList {
+    return new NumberList(this.items.filter(this.nonNullable));
+  }
+
   flatMap(mapper: (item: number, index?: number, array?: number[]) => number[]): NumberList {
     [1, 2].flatMap((item) => [item, item + 1]);
 

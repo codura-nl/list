@@ -26,6 +26,10 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return new MergeableList(this.items.filter(predicate));
   }
 
+  filterEmpty(): MergeableList<T> {
+    return new MergeableList(this.items.filter(this.nonNullable));
+  }
+
   flatMap<K extends Mergeable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): MergeableList<K> {
     return new MergeableList(this.items.flatMap(mapper));
   }

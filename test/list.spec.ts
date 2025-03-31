@@ -20,6 +20,12 @@ describe('List', () => {
   const mock1 = new Mock(1, mergeables);
   const mock2 = new Mock(2, mergeables);
 
+  it('should filter empty items', () => {
+    const list = List.of(mock1, null, mock2, undefined);
+
+    expect(list.filterEmpty().toArray()).toEqual([mock1, mock2]);
+  });
+
   it('should flatten and merge items by identifier', () => {
     const list = List.of(mock1, mock2);
 

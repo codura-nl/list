@@ -26,6 +26,10 @@ export class StringList extends AbstractList<string> {
     return new StringList(this.items.filter(predicate));
   }
 
+  filterEmpty(): StringList {
+    return new StringList(this.items.filter(this.nonNullable));
+  }
+
   flatMap(mapper: (item: string, index?: number, array?: string[]) => string[]): StringList {
     return new StringList(this.items.flatMap(mapper));
   }

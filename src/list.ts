@@ -29,6 +29,10 @@ export class List<T> extends AbstractList<T> {
     return new List(this.items.filter(predicate));
   }
 
+  filterEmpty(): List<T> {
+    return new List(this.items.filter(this.nonNullable));
+  }
+
   flatMap<K>(mapper: (item: T, index?: number, array?: T[]) => K[]): List<K> {
     return new List(this.items.flatMap(mapper));
   }

@@ -38,6 +38,10 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     return new AddableList(this.items.filter(predicate));
   }
 
+  filterEmpty(): AddableList<T> {
+    return new AddableList(this.items.filter(this.nonNullable));
+  }
+
   flatMap<K extends Addable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): AddableList<K> {
     return new AddableList(this.items.flatMap(mapper));
   }
