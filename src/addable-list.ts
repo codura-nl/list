@@ -38,7 +38,7 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     return new AddableList(this.items.filter(predicate));
   }
 
-  filterEmpty(): AddableList<T> {
+  filterEmpty(): AddableList<NonNullable<T>> {
     return new AddableList(this.items.filter(this.nonNullable));
   }
 

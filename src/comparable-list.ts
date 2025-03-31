@@ -44,7 +44,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(this.items.filter(predicate));
   }
 
-  filterEmpty(): ComparableList<T> {
+  filterEmpty(): ComparableList<NonNullable<T>> {
     return new ComparableList(this.items.filter(this.nonNullable));
   }
 

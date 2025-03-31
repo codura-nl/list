@@ -26,7 +26,7 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return new MergeableList(this.items.filter(predicate));
   }
 
-  filterEmpty(): MergeableList<T> {
+  filterEmpty(): MergeableList<NonNullable<T>> {
     return new MergeableList(this.items.filter(this.nonNullable));
   }
 

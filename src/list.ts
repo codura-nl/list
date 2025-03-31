@@ -29,7 +29,7 @@ export class List<T> extends AbstractList<T> {
     return new List(this.items.filter(predicate));
   }
 
-  filterEmpty(): List<T> {
+  filterEmpty(): List<NonNullable<T>> {
     return new List(this.items.filter(this.nonNullable));
   }
 
