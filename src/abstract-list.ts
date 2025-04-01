@@ -62,10 +62,6 @@ export abstract class AbstractList<T> {
     }, new Map<K, L>());
   }
 
-  nonNullable<T>(value: T): value is NonNullable<T> {
-    return value !== null && value !== undefined;
-  }
-
   reduce<K>(reducer: (acc: K, cur: T, index?: number, array?: T[]) => K, initialValue: K): K {
     return this.items.reduce(reducer, initialValue);
   }

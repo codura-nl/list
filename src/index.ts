@@ -1,6 +1,7 @@
 export * from './abstract-list';
 export * from './addable-list';
 export * from './comparable-list';
+export * from './global';
 export * from './interface';
 export * from './list';
 export * from './mergeable-list';

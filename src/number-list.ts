@@ -1,6 +1,7 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
 import { ComparableList } from '~/comparable-list';
+import { nonNullable } from '~/global';
 import { Addable, Comparable, Mergeable } from '~/interface';
 import { MergeableList } from '~/mergeable-list';
 import { StringList } from '~/string-list';
@@ -27,7 +28,7 @@ export class NumberList extends AbstractList<number> {
   }
 
   filterEmpty(): NumberList {
-    return new NumberList(this.items.filter(this.nonNullable));
+    return new NumberList(this.items.filter(nonNullable));
   }
 
   flatMap(mapper: (item: number, index?: number, array?: number[]) => number[]): NumberList {

@@ -1,5 +1,6 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
+import { nonNullable } from '~/global';
 import { Addable, Comparable, Mergeable } from '~/interface';
 import { MergeableList } from '~/mergeable-list';
 import { NumberList } from '~/number-list';
@@ -45,7 +46,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
   }
 
   filterEmpty(): ComparableList<NonNullable<T>> {
-    return new ComparableList(this.items.filter(this.nonNullable));
+    return new ComparableList(this.items.filter(nonNullable));
   }
 
   flatMap<K extends Comparable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): ComparableList<K> {
