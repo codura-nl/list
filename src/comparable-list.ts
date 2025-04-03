@@ -7,12 +7,12 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 
 export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
-  constructor(items: T[] = []) {
+  constructor(items?: T[]) {
     super(items);
   }
 
-  static from<T extends Comparable<T>>(iterable: Iterable<T> | ArrayLike<T> = []): ComparableList<T> {
-    return new ComparableList(Array.from(iterable));
+  static from<T extends Comparable<T>>(iterable?: Iterable<T> | ArrayLike<T>): ComparableList<T> {
+    return new ComparableList(Array.from(iterable ?? []));
   }
 
   static of<T extends Comparable<T>>(...items: T[]): ComparableList<T> {
@@ -23,8 +23,8 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return ComparableList.from(super.doDistinctBy(identifier));
   }
 
-  equals(items: T[] = []): boolean {
-    if (!items.length) {
+  equals(items?: T[]): boolean {
+    if (!items?.length) {
       return !this.items.length; // If both empty, they are equal
     }
 

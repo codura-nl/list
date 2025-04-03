@@ -7,12 +7,12 @@ import { MergeableList } from '~/mergeable-list';
 import { StringList } from '~/string-list';
 
 export class NumberList extends AbstractList<number> {
-  constructor(items: number[] = []) {
+  constructor(items?: number[]) {
     super(items);
   }
 
-  static from(iterable: Iterable<number> | ArrayLike<number> = []): NumberList {
-    return new NumberList(Array.from(iterable));
+  static from(iterable?: Iterable<number> | ArrayLike<number>): NumberList {
+    return new NumberList(Array.from(iterable ?? []));
   }
 
   static of(...items: number[]): NumberList {

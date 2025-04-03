@@ -1,5 +1,12 @@
 export abstract class AbstractList<T> {
-  protected constructor(protected readonly items: T[] = []) {
+  protected readonly items: T[]
+
+  protected constructor(items?: T[]) {
+    this.items = items ?? [];
+  }
+
+  get length(): number {
+    return this.items.length;
   }
 
   every(predicate: (item: T, index?: number, array?: T[]) => boolean): boolean {

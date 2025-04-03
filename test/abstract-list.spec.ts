@@ -11,6 +11,18 @@ describe('AbstractList', () => {
   const mock2 = new Mock(2, 'b');
   const mock3 = new Mock(3, 'a');
 
+  it('should support undefined', () => {
+    const list = List.from();
+
+    expect(list.length).toBe(0);
+  });
+
+  it('should support null', () => {
+    const list = List.from(null as unknown as Mock[]);
+
+    expect(list.length).toBe(0);
+  });
+
   it('should map by name', () => {
     const list = List.of(mock1, mock2);
 
