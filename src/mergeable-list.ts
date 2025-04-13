@@ -1,10 +1,11 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
 import { ComparableList } from '~/comparable-list';
-import { nonNullable } from '~/global';
 import { Addable, Comparable, Mergeable } from '~/interface';
 import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
+import { Distinct } from '~/util/distinct';
+import { Empty } from '~/util/empty';
 
 export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -20,15 +21,17 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
   }
 
   distinctBy<K>(identifier: (item: T) => K): MergeableList<T> {
-    return MergeableList.from(super.doDistinctBy(identifier));
+    return MergeableList.from(Distinct.distinctBy(this.items, identifier));
   }
 
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): MergeableList<T> {
     return new MergeableList(this.items.filter(predicate));
   }
 
-  filterEmpty(): MergeableList<NonNullable<T>> {
-    return new MergeableList(this.items.filter(nonNullable));
+  filterEmpty(): MergeableList<NonNullable<T>>;
+  filterEmpty<K>(value: (value: T) => K): MergeableList<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): MergeableList<NonNullable<T>> {
+    return new MergeableList(Empty.filter(this.items, value));
   }
 
   flatMap<K extends Mergeable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): MergeableList<K> {

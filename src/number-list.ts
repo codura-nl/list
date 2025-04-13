@@ -1,10 +1,11 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
 import { ComparableList } from '~/comparable-list';
-import { nonNullable } from '~/global';
 import { Addable, Comparable, Mergeable } from '~/interface';
 import { MergeableList } from '~/mergeable-list';
 import { StringList } from '~/string-list';
+import { Distinct } from '~/util/distinct';
+import { Empty } from '~/util/empty';
 
 export class NumberList extends AbstractList<number> {
   constructor(items?: number[]) {
@@ -20,7 +21,7 @@ export class NumberList extends AbstractList<number> {
   }
 
   distinct(): NumberList {
-    return NumberList.from(super.doDistinct());
+    return NumberList.from(Distinct.distinct(this.items));
   }
 
   filter(predicate: (value: number, index?: number, array?: number[]) => boolean): NumberList {
@@ -28,7 +29,7 @@ export class NumberList extends AbstractList<number> {
   }
 
   filterEmpty(): NumberList {
-    return new NumberList(this.items.filter(nonNullable));
+    return new NumberList(Empty.filter(this.items));
   }
 
   flatMap(mapper: (item: number, index?: number, array?: number[]) => number[]): NumberList {

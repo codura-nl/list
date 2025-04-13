@@ -80,38 +80,4 @@ export abstract class AbstractList<T> {
   toArray(): T[] {
     return this.items;
   }
-
-  protected doDistinct(): Iterable<T> {
-    const set = new Set(this.items);
-
-    return set.values();
-  }
-
-  protected doDistinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): Iterable<T | L> {
-    if (!mapper) {
-      const map = this.reduce((acc: Map<K, T>, cur: T) => {
-        const key = identifier(cur);
-
-        if (!acc.has(key)) {
-          acc.set(key, cur);
-        }
-
-        return acc;
-      }, new Map<K, T>());
-
-      return map.values();
-    }
-
-    const map = this.reduce((acc: Map<K, L>, cur: T) => {
-      const key = identifier(cur);
-
-      if (!acc.has(key)) {
-        acc.set(key, mapper(cur));
-      }
-
-      return acc;
-    }, new Map<K, L>());
-
-    return map.values();
-  }
 }

@@ -1,10 +1,11 @@
 import { AbstractList } from '~/abstract-list';
 import { AddableList } from '~/addable-list';
-import { nonNullable } from '~/global';
 import { Addable, Comparable, Mergeable } from '~/interface';
 import { MergeableList } from '~/mergeable-list';
 import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
+import { Distinct } from '~/util/distinct';
+import { Empty } from '~/util/empty';
 
 export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -20,7 +21,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
   }
 
   distinctBy<K>(identifier: (item: T) => K): ComparableList<T> {
-    return ComparableList.from(super.doDistinctBy(identifier));
+    return ComparableList.from(Distinct.distinctBy(this.items, identifier));
   }
 
   equals(items?: T[]): boolean {
@@ -45,8 +46,10 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(this.items.filter(predicate));
   }
 
-  filterEmpty(): ComparableList<NonNullable<T>> {
-    return new ComparableList(this.items.filter(nonNullable));
+  filterEmpty(): ComparableList<NonNullable<T>>;
+  filterEmpty<K>(value: (value: T) => K): ComparableList<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): ComparableList<NonNullable<T>> {
+    return new ComparableList(Empty.filter(this.items, value));
   }
 
   flatMap<K extends Comparable<K>>(mapper: (item: T, index?: number, array?: T[]) => K[]): ComparableList<K> {
