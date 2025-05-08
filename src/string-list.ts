@@ -73,6 +73,10 @@ export class StringList extends AbstractList<string> {
     return new StringList(Shuffle.shuffle(this.items));
   }
 
+  sort(): StringList {
+    return new StringList(this.items.toSorted((a, b) => a.localeCompare(b)));
+  }
+
   toAddableList<K extends Addable<K>>(mapper: (item: string) => K): AddableList<K> {
     return new AddableList(this.items.map(item => mapper(item)));
   }
@@ -89,7 +93,7 @@ export class StringList extends AbstractList<string> {
     return new NumberList(this.items.map(item => mapper(item)));
   }
 
-  toSorted(): StringList {
-    return new StringList(this.items.toSorted((a, b) => a.localeCompare(b)));
+  toSorted(compareFn: (a: string, b: string) => number): StringList {
+    return new StringList(this.items.toSorted(compareFn));
   }
 }

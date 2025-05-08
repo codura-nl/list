@@ -7,6 +7,7 @@ import { StringList } from '~/string-list';
 import { Distinct } from '~/util/distinct';
 import { Empty } from '~/util/empty';
 import { Shuffle } from '~/util/shuffle';
+import { Sort } from '~/util/sort';
 
 export class AddableList<T extends Addable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -81,6 +82,10 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
 
   shuffle(): AddableList<T> {
     return new AddableList(Shuffle.shuffle(this.items));
+  }
+
+  sortBy(identifier: (item: T) => number | string, reverse = false): AddableList<T> {
+    return new AddableList(Sort.sort(this.items, identifier, reverse));
   }
 
   toComparableList<K extends Comparable<K>>(mapper: (item: T) => K): ComparableList<K> {

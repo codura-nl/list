@@ -94,6 +94,10 @@ export class NumberList extends AbstractList<number> {
     return this.items.reduce((acc: number, cur: number): number => acc - cur, initialValue);
   }
 
+  sort(): NumberList {
+    return new NumberList(this.items.toSorted((a, b) => a - b));
+  }
+
   /**
    * Add all items in the list to the initialValue.
    *
@@ -115,8 +119,8 @@ export class NumberList extends AbstractList<number> {
     return new MergeableList(this.items.map(item => mapper(item)));
   }
 
-  toSorted(): NumberList {
-    return new NumberList(this.items.toSorted((a, b) => a - b));
+  toSorted(compareFn: (a: number, b: number) => number): NumberList {
+    return new NumberList(this.items.toSorted(compareFn));
   }
 
   toStringList(mapper: (item: number) => string): StringList {
