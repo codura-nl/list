@@ -9,10 +9,6 @@ export abstract class AbstractList<T> {
     return this.items.length;
   }
 
-  concat(...items: T[]): T[] {
-    return this.items.concat(...items);
-  }
-
   every(predicate: (item: T, index?: number, array?: T[]) => boolean): boolean {
     return this.items.every(predicate);
   }
@@ -75,12 +71,6 @@ export abstract class AbstractList<T> {
 
   reduce<K>(reducer: (acc: K, cur: T, index?: number, array?: T[]) => K, initialValue: K): K {
     return this.items.reduce(reducer, initialValue);
-  }
-
-  shuffle(): T[] {
-    return this.items.map(value => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value)
   }
 
   some(predicate: (item: T, index?: number, array?: T[]) => boolean): boolean {

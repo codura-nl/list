@@ -6,6 +6,7 @@ import { MergeableList } from '~/mergeable-list';
 import { StringList } from '~/string-list';
 import { Distinct } from '~/util/distinct';
 import { Empty } from '~/util/empty';
+import { Shuffle } from '~/util/shuffle';
 
 export class NumberList extends AbstractList<number> {
   constructor(items?: number[]) {
@@ -18,6 +19,10 @@ export class NumberList extends AbstractList<number> {
 
   static of(...items: number[]): NumberList {
     return new NumberList(items);
+  }
+
+  concat(items: ConcatArray<number>): NumberList {
+    return new NumberList(this.items.concat(items));
   }
 
   distinct(): NumberList {
@@ -70,6 +75,10 @@ export class NumberList extends AbstractList<number> {
    */
   min(): number {
     return Math.min(...this.items);
+  }
+
+  shuffle(): NumberList {
+    return new NumberList(Shuffle.shuffle(this.items));
   }
 
   /**

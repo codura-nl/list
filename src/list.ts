@@ -7,6 +7,7 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 import { Distinct } from '~/util/distinct';
 import { Empty } from '~/util/empty';
+import { Shuffle } from '~/util/shuffle';
 
 export class List<T> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -19,6 +20,10 @@ export class List<T> extends AbstractList<T> {
 
   static of<T>(...items: T[]): List<T> {
     return new List(items);
+  }
+
+  concat(items: ConcatArray<T>): List<T> {
+    return new List(this.items.concat(items));
   }
 
   distinctBy<K>(identifier: (item: T) => K): List<T>;
@@ -63,6 +68,10 @@ export class List<T> extends AbstractList<T> {
 
   map<K>(mapper: (item: T, index?: number, array?: T[]) => K): List<K> {
     return new List(this.items.map(mapper));
+  }
+
+  shuffle(): List<T> {
+    return new List(Shuffle.shuffle(this.items));
   }
 
   toAddableList<K extends Addable<K>>(mapper: (item: T) => K): AddableList<K> {

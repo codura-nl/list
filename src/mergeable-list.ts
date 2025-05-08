@@ -6,6 +6,7 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 import { Distinct } from '~/util/distinct';
 import { Empty } from '~/util/empty';
+import { Shuffle } from '~/util/shuffle';
 
 export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -18,6 +19,10 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
 
   static of<T extends Mergeable<T>>(...items: T[]): MergeableList<T> {
     return new MergeableList(items);
+  }
+
+  concat(items: ConcatArray<T>): MergeableList<T> {
+    return new MergeableList(this.items.concat(items));
   }
 
   distinctBy<K>(identifier: (item: T) => K): MergeableList<T> {
@@ -76,6 +81,10 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     }, new Array<T>());
 
     return new MergeableList(items);
+  }
+
+  shuffle(): MergeableList<T> {
+    return new MergeableList(Shuffle.shuffle(this.items));
   }
 
   toAddableList<K extends Addable<K>>(mapper: (item: T) => K): AddableList<K> {

@@ -6,6 +6,7 @@ import { NumberList } from '~/number-list';
 import { StringList } from '~/string-list';
 import { Distinct } from '~/util/distinct';
 import { Empty } from '~/util/empty';
+import { Shuffle } from '~/util/shuffle';
 
 export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
   constructor(items?: T[]) {
@@ -18,6 +19,10 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
 
   static of<T extends Comparable<T>>(...items: T[]): ComparableList<T> {
     return new ComparableList(items);
+  }
+
+  concat(items: ConcatArray<T>): ComparableList<T> {
+    return new ComparableList(this.items.concat(items));
   }
 
   distinctBy<K>(identifier: (item: T) => K): ComparableList<T> {
@@ -74,6 +79,10 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
 
   map<K extends Comparable<K>>(mapper: (value: T, index?: number, array?: T[]) => K): ComparableList<K> {
     return new ComparableList(this.items.map(mapper));
+  }
+
+  shuffle(): ComparableList<T> {
+    return new ComparableList(Shuffle.shuffle(this.items));
   }
 
   toAddableList<K extends Addable<K>>(mapper: (item: T) => K): AddableList<K> {
