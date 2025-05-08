@@ -95,7 +95,7 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     return new NumberList(this.items.map(item => mapper(item)));
   }
 
-  toSorted(compareFn?: (a: T, b: T) => number): AddableList<T> {
+  toSorted(compareFn: (a: T, b: T) => number): AddableList<T> {
     return new AddableList(this.items.toSorted(compareFn));
   }
 

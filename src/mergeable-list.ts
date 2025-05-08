@@ -103,7 +103,7 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return new NumberList(this.items.map(item => mapper(item)));
   }
 
-  toSorted(compareFn?: (a: T, b: T) => number): MergeableList<T> {
+  toSorted(compareFn: (a: T, b: T) => number): MergeableList<T> {
     return new MergeableList(this.items.toSorted(compareFn));
   }
 

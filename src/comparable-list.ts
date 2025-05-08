@@ -101,7 +101,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new NumberList(this.items.map(item => mapper(item)));
   }
 
-  toSorted(compareFn?: (a: T, b: T) => number): ComparableList<T> {
+  toSorted(compareFn: (a: T, b: T) => number): ComparableList<T> {
     return new ComparableList(this.items.toSorted(compareFn));
   }
 
