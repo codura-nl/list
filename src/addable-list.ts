@@ -33,7 +33,11 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
     }, initialValue);
   }
 
-  concat(items: ConcatArray<T>): AddableList<T> {
+  concat(items?: ConcatArray<T>): AddableList<T> {
+    if (!items) {
+      return this;
+    }
+
     return new AddableList(this.items.concat(items));
   }
 
@@ -89,6 +93,10 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
 
   toNumberList(mapper: (item: T) => number): NumberList {
     return new NumberList(this.items.map(item => mapper(item)));
+  }
+
+  toSorted(compareFn?: (a: T, b: T) => number): AddableList<T> {
+    return new AddableList(this.items.toSorted(compareFn));
   }
 
   toStringList(mapper: (item: T) => string): StringList {

@@ -21,7 +21,11 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     return new ComparableList(items);
   }
 
-  concat(items: ConcatArray<T>): ComparableList<T> {
+  concat(items?: ConcatArray<T>): ComparableList<T> {
+    if (!items) {
+      return this;
+    }
+
     return new ComparableList(this.items.concat(items));
   }
 
@@ -95,6 +99,10 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
 
   toNumberList(mapper: (item: T) => number): NumberList {
     return new NumberList(this.items.map(item => mapper(item)));
+  }
+
+  toSorted(compareFn?: (a: T, b: T) => number): ComparableList<T> {
+    return new ComparableList(this.items.toSorted(compareFn));
   }
 
   toStringList(mapper: (item: T) => string): StringList {

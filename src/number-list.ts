@@ -21,7 +21,11 @@ export class NumberList extends AbstractList<number> {
     return new NumberList(items);
   }
 
-  concat(items: ConcatArray<number>): NumberList {
+  concat(items?: ConcatArray<number>): NumberList {
+    if (!items) {
+      return this;
+    }
+
     return new NumberList(this.items.concat(items));
   }
 
@@ -109,6 +113,10 @@ export class NumberList extends AbstractList<number> {
 
   toMergeableList<K extends Mergeable<K>>(mapper: (item: number) => K): MergeableList<K> {
     return new MergeableList(this.items.map(item => mapper(item)));
+  }
+
+  toSorted(): NumberList {
+    return new NumberList(this.items.toSorted((a, b) => a - b));
   }
 
   toStringList(mapper: (item: number) => string): StringList {

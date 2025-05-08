@@ -22,7 +22,11 @@ export class List<T> extends AbstractList<T> {
     return new List(items);
   }
 
-  concat(items: ConcatArray<T>): List<T> {
+  concat(items?: ConcatArray<T>): List<T> {
+    if (!items) {
+      return this;
+    }
+
     return new List(this.items.concat(items));
   }
 
@@ -88,6 +92,10 @@ export class List<T> extends AbstractList<T> {
 
   toNumberList(mapper: (item: T) => number): NumberList {
     return new NumberList(this.items.map(item => mapper(item)));
+  }
+
+  toSorted<K>(compareFn?: (a: T, b: T) => number): List<T> {
+    return new List(this.items.toSorted(compareFn));
   }
 
   toStringList(mapper: (item: T) => string): StringList {

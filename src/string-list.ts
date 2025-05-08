@@ -21,7 +21,11 @@ export class StringList extends AbstractList<string> {
     return new StringList(items);
   }
 
-  concat(items: ConcatArray<string>): StringList {
+  concat(items?: ConcatArray<string>): StringList {
+    if (!items) {
+      return this;
+    }
+
     return new StringList(this.items.concat(items));
   }
 
@@ -83,5 +87,9 @@ export class StringList extends AbstractList<string> {
 
   toNumberList(mapper: (item: string) => number): NumberList {
     return new NumberList(this.items.map(item => mapper(item)));
+  }
+
+  toSorted(): StringList {
+    return new StringList(this.items.toSorted((a, b) => a.localeCompare(b)));
   }
 }
