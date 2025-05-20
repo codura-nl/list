@@ -13,6 +13,14 @@ export abstract class AbstractList<T> {
     return this.items.every(predicate);
   }
 
+  includes(item: T): boolean {
+    return this.items.includes(item);
+  }
+
+  findIndex(predicate: (item: T, index?: number, array?: T[]) => boolean): number {
+    return this.items.findIndex(predicate);
+  }
+
   groupBy<K>(identifier: (item: T) => K): Map<K, T[]>;
 
   groupBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): Map<K, L[]>;
