@@ -2,7 +2,7 @@ export class Sort {
   static sort<T>(items: T[], identifier: (item: T) => number | string, reverse = false): T[] {
     return items.toSorted((a, b) => {
       const aValue = identifier(reverse ? b : a);
-      const bValue = identifier(reverse ? b : a);
+      const bValue = identifier(reverse ? a : b);
 
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         return aValue.localeCompare(bValue);

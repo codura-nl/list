@@ -36,4 +36,16 @@ describe('AbstractList', () => {
     expect(group.size).toBe(2);
     expect(group.get('a')?.length).toBe(2);
   });
+
+  it('should sort by name', () => {
+    const list = List.of(mock2, mock1, mock3);
+
+    expect(list.sortBy(item => item.name).toArray()).toEqual([mock1, mock3, mock2]);
+  });
+
+  it('should sort by value', () => {
+    const list = List.of(mock2, mock1, mock3);
+
+    expect(list.sortBy(item => item.value).toArray()).toEqual([mock1, mock2, mock3]);
+  });
 });
