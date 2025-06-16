@@ -13,12 +13,26 @@ export abstract class AbstractList<T> {
     return this.items.every(predicate);
   }
 
-  includes(item: T): boolean {
-    return this.items.includes(item);
+  first(): T | undefined {
+    if (this.items.length > 0) {
+      return this.items[0];
+    }
+  }
+
+  last(): T | undefined {
+    return this.items[this.items.length - 1];
   }
 
   findIndex(predicate: (item: T, index?: number, array?: T[]) => boolean): number {
     return this.items.findIndex(predicate);
+  }
+
+  get(index: number): T | undefined {
+    if (index < 0 || index >= this.items.length) {
+      return undefined;
+    }
+
+    return this.items[index];
   }
 
   groupBy<K>(identifier: (item: T) => K): Map<K, T[]>;
@@ -51,6 +65,10 @@ export abstract class AbstractList<T> {
 
       return acc;
     }, new Map<K, L[]>());
+  }
+
+  includes(item: T): boolean {
+    return this.items.includes(item);
   }
 
   mapBy<K>(identifier: (item: T) => K): Map<K, T>;
