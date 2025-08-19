@@ -5,9 +5,9 @@
   "author": "Jan Willem Harmelink",
   "license": "GPL-3.0-only",
   "type": "module",
-  "types": "./dist/list.d.ts",
-  "main": "./dist/list.cjs",
-  "module": "./dist/list.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "publishConfig": {
     "access": "public"
   },
@@ -17,10 +17,10 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/list.d.ts",
-      "import": "./dist/list.js",
-      "require": "./dist/list.cjs",
-      "default": "./dist/list.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     }
   },
   "files": [

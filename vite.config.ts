@@ -8,7 +8,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'List',
       formats: ['es', 'cjs'],
-      fileName: 'list',
+      fileName: 'index',
     },
     sourcemap: true,
   },
