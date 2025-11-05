@@ -34,7 +34,8 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
     return MergeableList.from(Distinct.distinctBy(this.items, identifier));
   }
 
-  filter(predicate: (value: T, index?: number, array?: T[]) => boolean): MergeableList<T> {
+  filter<S extends T & Mergeable<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): MergeableList<S>;
+  filter(predicate: (item: T, index?: number, array?: T[]) => boolean): MergeableList<T> {
     return new MergeableList(this.items.filter(predicate));
   }
 

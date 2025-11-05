@@ -61,8 +61,8 @@ export class StringList extends AbstractList<string> {
     return new NumberList(this.items.flatMap(item => mapper(item)));
   }
 
-  join(seperator?: string): string {
-    return this.items.join(seperator);
+  join(separator?: string): string {
+    return this.items.join(separator);
   }
 
   map(mapper: (value: string, index?: number, array?: string[]) => string): StringList {

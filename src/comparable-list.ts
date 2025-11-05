@@ -52,6 +52,7 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
     );
   }
 
+  filter<S extends T & ComparableList<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): ComparableList<S>;
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): ComparableList<T> {
     return new ComparableList(this.items.filter(predicate));
   }
