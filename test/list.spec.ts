@@ -15,10 +15,22 @@ class Mock {
   }
 }
 
+class Nock {
+  constructor(readonly value: number, readonly mergeables: TestMergeable[]) {
+  }
+}
+
 describe('List', () => {
   const mergeables = [new TestMergeable(1, 10), new TestMergeable(2, 20)];
   const mock1 = new Mock(1, mergeables);
   const mock2 = new Mock(2, mergeables);
+  const nock = new Nock(3, mergeables);
+
+  it('should filter nock', () => {
+    const list = List.of(mock1, mock2, nock);
+
+    expect(list.filter(d => d instanceof Mock).toArray()).toEqual([mock1, mock2]);
+  });
 
   it('should filter empty items', () => {
     const list = List.of(mock1, null, mock2, undefined);

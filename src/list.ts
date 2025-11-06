@@ -38,8 +38,8 @@ export class List<T> extends AbstractList<T> {
     return List.from(Distinct.distinctBy(this.items, identifier, mapper));
   }
 
-  filter(predicate: (item: T, index?: number, array?: T[]) => boolean): List<T>;
   filter<S extends T>(predicate: (item: T, index?: number, array?: T[]) => item is S): List<S>;
+  filter(predicate: (item: T, index?: number, array?: T[]) => boolean): List<T>;
   filter<S extends T>(predicate: (item: T, index?: number, array?: T[]) => item is S): List<S> {
     return new List(this.items.filter(predicate));
   }
