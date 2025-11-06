@@ -33,17 +33,20 @@ export class List<T> extends AbstractList<T> {
 
   distinctBy<K>(identifier: (item: T) => K): List<T>;
   distinctBy<K, L>(identifier: (item: T) => K, mapper: (item: T) => L): List<L>;
+  distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): List<T | L>;
   distinctBy<K, L>(identifier: (item: T) => K, mapper?: (item: T) => L): List<T | L> {
     return List.from(Distinct.distinctBy(this.items, identifier, mapper));
   }
 
   filter(predicate: (item: T, index?: number, array?: T[]) => boolean): List<T>;
+  filter<S extends T>(predicate: (item: T, index?: number, array?: T[]) => item is S): List<S>;
   filter<S extends T>(predicate: (item: T, index?: number, array?: T[]) => item is S): List<S> {
     return new List(this.items.filter(predicate));
   }
 
   filterEmpty(): List<NonNullable<T>>;
   filterEmpty<K>(value: (value: T) => K): List<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): List<NonNullable<T>>;
   filterEmpty<K>(value?: (value: T) => K): List<NonNullable<T>> {
     return new List(Empty.filter(this.items, value));
   }

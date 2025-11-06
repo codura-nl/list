@@ -35,12 +35,14 @@ export class MergeableList<T extends Mergeable<T>> extends AbstractList<T> {
   }
 
   filter(predicate: (item: T, index?: number, array?: T[]) => boolean): MergeableList<T>;
+  filter<S extends T & Mergeable<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): MergeableList<S>;
   filter<S extends T & Mergeable<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): MergeableList<S> {
     return new MergeableList(this.items.filter(predicate));
   }
 
   filterEmpty(): MergeableList<NonNullable<T>>;
   filterEmpty<K>(value: (value: T) => K): MergeableList<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): MergeableList<NonNullable<T>>;
   filterEmpty<K>(value?: (value: T) => K): MergeableList<NonNullable<T>> {
     return new MergeableList(Empty.filter(this.items, value));
   }

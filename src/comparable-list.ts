@@ -53,12 +53,14 @@ export class ComparableList<T extends Comparable<T>> extends AbstractList<T> {
   }
 
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): ComparableList<T>;
+  filter<S extends T & ComparableList<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): ComparableList<S>;
   filter<S extends T & ComparableList<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): ComparableList<S> {
     return new ComparableList(this.items.filter(predicate));
   }
 
   filterEmpty(): ComparableList<NonNullable<T>>;
   filterEmpty<K>(value: (value: T) => K): ComparableList<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): ComparableList<NonNullable<T>>;
   filterEmpty<K>(value?: (value: T) => K): ComparableList<NonNullable<T>> {
     return new ComparableList(Empty.filter(this.items, value));
   }

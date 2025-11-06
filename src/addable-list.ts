@@ -47,12 +47,14 @@ export class AddableList<T extends Addable<T>> extends AbstractList<T> {
   }
 
   filter(predicate: (value: T, index?: number, array?: T[]) => boolean): AddableList<T>;
+  filter<S extends T & AddableList<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): AddableList<S>;
   filter<S extends T & AddableList<S>>(predicate: (item: T, index?: number, array?: T[]) => item is S): AddableList<S> {
     return new AddableList(this.items.filter(predicate));
   }
 
   filterEmpty(): AddableList<NonNullable<T>>;
   filterEmpty<K>(value: (value: T) => K): AddableList<NonNullable<T>>;
+  filterEmpty<K>(value?: (value: T) => K): AddableList<NonNullable<T>>;
   filterEmpty<K>(value?: (value: T) => K): AddableList<NonNullable<T>> {
     return new AddableList(Empty.filter(this.items, value));
   }
